@@ -2,7 +2,7 @@
 
 Trace shared-object origins of a running process.
 
-tracso reads /proc/<pid>/maps, walks the ELF DT_NEEDED graph of every
+tracso reads `/proc/<pid>/maps`, walks the ELF DT_NEEDED graph of every
 shared library the process has loaded, and produces a report mapping
 each library back to the module or package that caused it to be loaded.
 
@@ -47,7 +47,7 @@ python -m tracso --run /root/virtual/python -c "import torch; import torch.nn as
   _multiarray_umath.so                       10.2 MB  █░░░░░░░░░░░░░░░  in=1    1 py
   libgfortran-83c28eba-b4027c22.so.5.0.0      2.7 MB  █░░░░░░░░░░░░░░░  in=1    2 py
 
-_Try: tracso --why <lib>  ·  tracso --tree  ·  tracso --json | jq_
+_Try: `tracso --why <lib>`  ·  `tracso --tree`  ·  `tracso --json | jq`_
 
 Here is the image created by the same command but with `-o ./so_trace.png` before the `--run` option
 ![DotGraphExample](so_trace.png)
@@ -126,7 +126,7 @@ Orphans
 
 ## How it works
 
-1. Read /proc/<pid>/maps to obtain the set of shared objects currently
+1. Read `/proc/<pid>/maps` to obtain the set of shared objects currently
    mapped by the process.
 
 2. For each shared object, run `readelf -d` to extract its DT_NEEDED,
@@ -182,6 +182,9 @@ Formatting
 black ./tracso
 isort ./tracso
 ```
+
+## Changelog
+See [CHANGELOG](CHANGELOG.md)
 
 ## License
 
