@@ -7,7 +7,7 @@ name = "tracso"
 version = "1.0.0"
 description = "Trace shared-object origins of a running process"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 license = { text = "MIT" }
 authors = [
     { name = "Leinier Orama", email = "lof310w@gmail.com" },
@@ -77,7 +77,7 @@ include = [
 
 [tool.ruff]
 line-length = 100
-target-version = "py39"
+target-version = "py313"
 exclude = [".git", "__pycache__", "build", "dist", ".venv"]
 
 [tool.ruff.lint]
@@ -100,7 +100,7 @@ ignore = [
 "tracso/utils.py" = ["E402"]  # SITE_CODE / INJECT_CODE string literals
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.8"
 warn_unused_ignores = true
 warn_redundant_casts = true
 no_implicit_optional = true
