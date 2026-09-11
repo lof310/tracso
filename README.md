@@ -13,14 +13,15 @@ This is the output of running this which gives a summary.
 ```bash
 python -m tracso --run /root/virtual/python -c "import torch; import torch.nn as nn; import torch.nn.functional as F; import requests; import flask; import jupyter"
 ```
-**tracso · run:python:50506 (python) · 31 libs · 478.0 MB**
+```
+tracso · run:python:50506 (python) · 31 libs · 478.0 MB
 
-**Notable**
+Notable
   * libscipy_openblas64_-017048f4.so is loaded directly by 2 py: packages (py:numpy._core, py:numpy.linalg)
   * py:torch._C owns 91% of the total footprint (435.8 MB)
   * libtorch_cpu.so alone is 407.3 MB (85% of the total)
 
-**Heaviest packages**
+Heaviest packages
   py:torch._C                       435.8 MB  ███████████████░   91.2%  (16 libs)
   py:numpy._core                     25.9 MB  █░░░░░░░░░░░░░░░    5.4%  (12 libs)
   py:numpy.linalg                    14.5 MB  ░░░░░░░░░░░░░░░░    3.0%  (10 libs)
@@ -30,7 +31,7 @@ python -m tracso --run /root/virtual/python -c "import torch; import torch.nn as
   py:_contextvars                    14.0 KB  ░░░░░░░░░░░░░░░░    0.0%  (1 libs)
   (unattributed / system)           202.2 KB  ░░░░░░░░░░░░░░░░    0.0%  (2 libs)
 
-**Most depended-on libraries**
+Most depended-on libraries
   libc.so.6                                   1.9 MB  ████████████████  in=26   6 py
   libm.so.6                                 978.2 KB  ██████░░░░░░░░░░  in=10   3 py
   ld-linux-x86-64.so.2                      224.8 KB  ██████░░░░░░░░░░  in=9    6 py
@@ -47,7 +48,8 @@ python -m tracso --run /root/virtual/python -c "import torch; import torch.nn as
   _multiarray_umath.so                       10.2 MB  █░░░░░░░░░░░░░░░  in=1    1 py
   libgfortran-83c28eba-b4027c22.so.5.0.0      2.7 MB  █░░░░░░░░░░░░░░░  in=1    2 py
 
-_Try: `tracso --why <lib>`  ·  `tracso --tree`  ·  `tracso --json | jq`_
+Try: tracso --why <lib>  ·  tracso --tree  ·  tracso --json | jq
+```
 
 Here is the image created by the same command but with `-o ./so_trace.png` before the `--run` option
 ![DotGraphExample](so_trace.png)
