@@ -8,18 +8,63 @@ each library back to the module or package that caused it to be loaded.
 
 Supported runtimes: Python 3.8 and later.
 
+## Example
+This is the output of running this which gives a summary.
+```bash
+python -m tracso --run /root/virtual/python -c "import torch; import torch.nn as nn; import torch.nn.functional as F; import requests; import flask; import jupyter"
+```
+**tracso · run:python:50506 (python) · 31 libs · 478.0 MB**
+
+**Notable**
+  * libscipy_openblas64_-017048f4.so is loaded directly by 2 py: packages (py:numpy._core, py:numpy.linalg)
+  * py:torch._C owns 91% of the total footprint (435.8 MB)
+  * libtorch_cpu.so alone is 407.3 MB (85% of the total)
+
+**Heaviest packages**
+  py:torch._C                       435.8 MB  ███████████████░   91.2%  (16 libs)
+  py:numpy._core                     25.9 MB  █░░░░░░░░░░░░░░░    5.4%  (12 libs)
+  py:numpy.linalg                    14.5 MB  ░░░░░░░░░░░░░░░░    3.0%  (10 libs)
+  py:_lzma                          599.4 KB  ░░░░░░░░░░░░░░░░    0.1%  (4 libs)
+  py:_ctypes                        574.8 KB  ░░░░░░░░░░░░░░░░    0.1%  (4 libs)
+  py:_bz2                           473.5 KB  ░░░░░░░░░░░░░░░░    0.1%  (4 libs)
+  py:_contextvars                    14.0 KB  ░░░░░░░░░░░░░░░░    0.0%  (1 libs)
+  (unattributed / system)           202.2 KB  ░░░░░░░░░░░░░░░░    0.0%  (2 libs)
+
+**Most depended-on libraries**
+  libc.so.6                                   1.9 MB  ████████████████  in=26   6 py
+  libm.so.6                                 978.2 KB  ██████░░░░░░░░░░  in=10   3 py
+  ld-linux-x86-64.so.2                      224.8 KB  ██████░░░░░░░░░░  in=9    6 py
+  libpthread.so.0                            14.1 KB  █████░░░░░░░░░░░  in=8    3 py
+  libgcc_s.so.1                             178.6 KB  ████░░░░░░░░░░░░  in=7    3 py
+  libstdc++.so.6                              2.7 MB  ███░░░░░░░░░░░░░  in=5    2 py
+  libdl.so.2                                 14.1 KB  ███░░░░░░░░░░░░░  in=5    1 py
+  libtorch_cpu.so                           407.3 MB  ██░░░░░░░░░░░░░░  in=3    1 py
+  libc10.so                                   1.2 MB  ██░░░░░░░░░░░░░░  in=3    1 py
+  libgomp.so.1                              247.9 KB  ██░░░░░░░░░░░░░░  in=3    1 py
+  libscipy_openblas64_-017048f4.so           24.0 MB  █░░░░░░░░░░░░░░░  in=2    2 py
+  librt.so.1                                 14.2 KB  █░░░░░░░░░░░░░░░  in=2    1 py
+  libtorch_python.so                         24.8 MB  █░░░░░░░░░░░░░░░  in=1    1 py
+  _multiarray_umath.so                       10.2 MB  █░░░░░░░░░░░░░░░  in=1    1 py
+  libgfortran-83c28eba-b4027c22.so.5.0.0      2.7 MB  █░░░░░░░░░░░░░░░  in=1    2 py
+
+_Try: tracso --why <lib>  ·  tracso --tree  ·  tracso --json | jq_
+
+Here is the image created by the same command but with `-o ./so_trace.png` before the `--run` option
+![DotGraphExample](so_trace.png)
+
 ## Usage
+```
 tracso [-h] [-o OUTPUT] [--run ...] [--why SONAME] [--pick] [--pick-py] [--pick-mode {textual,curses,plain}] [--tree] [--json] [--csv]
               [--depth DEPTH] [--name-depth N] [--color {auto,always,never}] [-v] [--version]
               [target]
 
-**positional arguments:**
+positional arguments:
   target                PID or library path
 
-**options:**
-  -h, --help            show this help message and exit
-  -o, --output OUTPUT   output dot graph
-  --run ...             run command and trace it
+options:
+  -h, --help            show this help message and exit_
+  -o, --output OUTPUT   output dot graph_
+  --run ...             run command and trace it_
   --why SONAME          trace origin of a library
   --pick                interactively pick a process to trace
   --pick-py             Pick only python processes
@@ -32,6 +77,7 @@ tracso [-h] [-o OUTPUT] [--run ...] [--why SONAME] [--pick] [--pick-py] [--pick-
   --color {auto,always,never}
   -v, --verbose         log injection decisions to stderr
   --version             show program's version number and exit
+```
 
 ## Requirements
 - Linux
@@ -100,7 +146,6 @@ Orphans
    that does.
 
 5. Render according to the requested format.
-
 
 ## Attribution model
 
